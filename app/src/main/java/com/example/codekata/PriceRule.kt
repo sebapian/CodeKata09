@@ -14,10 +14,14 @@ class PriceRule {
         var total = 0f
         cart.forEach { item ->
             val itemAmount = item.value
-            val itemRule = priceRule.first { it.sku == item.key }
-            val itemPrice = itemRule.price
-            val itemBatchSize = itemRule.batchSize
-            val itemBatchPrice = itemRule.batchPrice
+            val itemRule = priceRule.filter { it.sku == item.key }
+            if (itemRule.isEmpty()) {
+                throw IllegalArgumentException("Item not found in price rule")
+            }
+            val firstMatchingItem = itemRule.first()
+            val itemPrice = firstMatchingItem.price
+            val itemBatchSize = firstMatchingItem.batchSize
+            val itemBatchPrice = firstMatchingItem.batchPrice
 
             // Because the batch size and batch price are optional, we need to check if they are null
             total += if (itemBatchSize != null && itemBatchPrice != null) {

@@ -8,8 +8,13 @@
 - I have chosen to go with a Linked Hash Map to register items into a cart. Every time an item is scanned with the `scan` function, it should update the cart with the `sku` being the key and `number` in the value.
 - In the `ReadPriceRuleCsv.kt` file, there is a `readCsv` function that reads the `priceRules.csv` file and produces a **List** of *Rule*.
 - Also, in the `PriceRule.kt` file, `calculateCartTotal` function will take in a cart (Linked Hash Map). It iterates through the cart, item by item, and tries to match it with the List of rules. When matched, a simple algorithm using mod will work with the item amount and batch size (if any) to calculate what the total price is.
+- I have added an IllegalArgument throw to handle cases where the item is not found in the price rules. This is to ensure that the program does not crash when an item is not found in the price rules.
 
 ### Things to note:
 - Project was created with default Android project template so ignore `MainActivity.kt` file
 - For those who are unaware of Android projects, files are found in `app/src/main` while Unit tests are found in `app/src/test/java/com/example/codekata`
+
+### Future considerations:
+- Putting the Mobile Developer cap on, an app generally does not rely on a local csv file as there is no flexibility to update the price rules. This would normally be a network call to the BE, an uploading price rules.
+- In a situation where there are millions of items in rules, similar to a supermarket, this solution take quite some time to process. So the idea would be to split up the items by categories. 
 

@@ -43,4 +43,15 @@ class CheckOutTest {
         co.scan("B"); assertEquals(175f,co.total)
     }
 
+    @Test
+    fun `test item not found in price rule`() {
+        val co = CheckOut()
+        assertThrows(IllegalArgumentException::class.java) {
+            co.scan("E")
+            co.scan("R")
+        }
+    }
+
+
+
 }
