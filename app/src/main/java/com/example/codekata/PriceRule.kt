@@ -1,13 +1,15 @@
 package com.example.codekata
 
 import com.example.codekata.ReadPriceRuleCsv.readCsv
+import com.example.codekata.model.Rule
+import java.io.InputStream
 
 class PriceRule {
 
-    private var priceRule = readCsv(Constants.RULE_DESTINATION)
+    lateinit var priceRule: List<Rule>
 
-    fun setPriceRule(path: String) {
-        this.priceRule = readCsv(path)
+    fun setPriceRule(inputStream: InputStream) {
+        this.priceRule = readCsv(inputStream)
     }
 
     fun calculateCartTotal(cart: LinkedHashMap<String, Int>): Float {

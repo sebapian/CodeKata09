@@ -5,6 +5,6 @@ import kotlin.io.path.absolutePathString
 
 object Constants {
 
-    val RULE_DESTINATION = Path("src/main/java/com/example/codekata/priceRules.csv").absolutePathString()
+    val RULE_DESTINATION = Path("src/main/java/com/example/codekata/pricerules.csv").absolutePathString()
 
 }
