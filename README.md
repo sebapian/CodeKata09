@@ -18,3 +18,7 @@
 - Putting the Mobile Developer cap on, an app generally does not rely on a local csv file as there is no flexibility to update the price rules. This would normally be a network call to the BE, an uploading price rules.
 - In a situation where there are millions of items in rules, similar to a supermarket, this solution take quite some time to process. So the idea would be to split up the items by categories. 
 
+### Additional:
+- During my free time, I have spun up a simple UI in Android to simulate the Shop and Cart experience. Please see below for the GIF run through:
+  
+![ShopCartApp](https://github.com/sebapian/CodeKata09/assets/89761448/5ce9f15b-0df7-4b2f-84bf-6f623fff52f1)
