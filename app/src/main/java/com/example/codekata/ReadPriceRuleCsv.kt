@@ -5,12 +5,14 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 
 object ReadPriceRuleCsv {
 
-    fun readCsv(path: String): List<Rule> {
-        return csvReader().open(path) {
-            readAllAsSequence().map {
+    fun readCsv(path: String): LinkedHashMap<String, Rule> {
+        var priceRuleHashMap = linkedMapOf<String, Rule>()
+        csvReader().open(path) {
+            readAllAsSequence().forEach {
                 val (sku, price, batchSize, batchPrice) = it
-                Rule(sku = sku, price = price.toFloat(), batchSize = batchSize.toIntOrNull(), batchPrice = batchPrice.toFloatOrNull())
-            }.toList()
+                priceRuleHashMap[sku] = Rule(sku = sku, price = price.toFloat(), batchSize = batchSize.toIntOrNull(), batchPrice = batchPrice.toFloatOrNull())
+            }
         }
+        return priceRuleHashMap
     }
 }

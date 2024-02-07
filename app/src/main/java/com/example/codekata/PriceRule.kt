@@ -1,5 +1,6 @@
 package com.example.codekata
 
+import android.util.Log
 import com.example.codekata.ReadPriceRuleCsv.readCsv
 
 class PriceRule {
@@ -13,27 +14,25 @@ class PriceRule {
     fun calculateCartTotal(cart: LinkedHashMap<String, Int>): Float {
         var total = 0f
         cart.forEach { item ->
-            val itemAmount = item.value
-            val itemRule = priceRule.filter { it.sku == item.key }
-            if (itemRule.isEmpty()) {
-                throw IllegalArgumentException("Item not found in price rule")
-            }
-            val firstMatchingItem = itemRule.first()
-            val itemPrice = firstMatchingItem.price
-            val itemBatchSize = firstMatchingItem.batchSize
-            val itemBatchPrice = firstMatchingItem.batchPrice
+            val selectedItemAmount = item.value
+            val selectedItemRule = priceRule[item.key]
+                ?: throw IllegalArgumentException("Item not found in price rule")
+
+            val itemPrice = selectedItemRule.price
+            val itemBatchSize = selectedItemRule.batchSize
+            val itemBatchPrice = selectedItemRule.batchPrice
 
             // Because the batch size and batch price are optional, we need to check if they are null
             total += if (itemBatchSize != null && itemBatchPrice != null) {
                 // If the item amount is a multiple of the batch size, we can calculate the total price using the batch price
-                if (itemAmount % itemBatchSize == 0) {
-                    itemAmount / itemBatchSize * itemBatchPrice
+                if (selectedItemAmount % itemBatchSize == 0) {
+                    selectedItemAmount / itemBatchSize * itemBatchPrice
                 } else {
                     // If the item amount is not a multiple of the batch size, we need to calculate the total price using the batch price and the regular price
-                    itemAmount % itemBatchSize * itemPrice + itemAmount / itemBatchSize * itemBatchPrice
+                    selectedItemAmount % itemBatchSize * itemPrice + selectedItemAmount / itemBatchSize * itemBatchPrice
                 }
             } else {
-                itemAmount * itemPrice
+                selectedItemAmount * itemPrice
             }
         }
         return total
