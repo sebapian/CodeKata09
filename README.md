@@ -20,4 +20,5 @@
 
 ### Additional:
 - During my free time, I have spun up a simple UI in Android to simulate the Shop and Cart experience. Please see below for the GIF run through:
+  
 ![ShopCartApp](https://github.com/sebapian/CodeKata09/assets/89761448/5ce9f15b-0df7-4b2f-84bf-6f623fff52f1)
