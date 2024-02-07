@@ -37,7 +37,12 @@ import com.example.codekata.ReadPriceRuleCsv
 import com.example.codekata.viewmodel.CartViewModel
 
 @Composable
-fun CartScreen(navController: NavHostController, cartViewModel: CartViewModel, paddingValues: PaddingValues, context: Context) {
+fun CartScreen(
+    navController: NavHostController,
+    cartViewModel: CartViewModel,
+    paddingValues: PaddingValues,
+    context: Context
+) {
 
     val cartItems = remember { cartViewModel.cart }
     val totalPrice = remember { cartViewModel.totalPrice }
@@ -48,71 +53,32 @@ fun CartScreen(navController: NavHostController, cartViewModel: CartViewModel, p
             .padding(4.dp)
             .padding(bottom = paddingValues.calculateBottomPadding())
     ) {
-        LazyColumn(modifier = Modifier
-            .fillMaxSize()
-            .weight(7f)) {
-            Log.d("SKU", cartItems.toString())
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(7f)
+        ) {
             cartItems.forEach { cartItem ->
                 item {
-                    Column {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(100.dp)
-                                .padding(4.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = cartItem.key,
-                                fontWeight = FontWeight.Bold,
-                                textAlign = TextAlign.Center,
-                                fontSize = 40.sp,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .weight(1f)
-                            )
-                            Column(
-                                modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-
-                                Row(
-                                    modifier = Modifier.weight(1f, true),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                ) {
-
-                                    IconButton(onClick = {
-                                        cartViewModel.removeFromCart(cartItem.key)
-                                    }) {
-                                        Icon(
-                                            painter = painterResource(id = R.drawable.ic_remove),
-                                            contentDescription = null
-                                        )
-                                    }
-                                    Text(text = "${cartItem.value}", fontSize = 22.sp)
-
-                                }
-                            }
-
-                        }
-                        Divider(
-                            color = Color.LightGray,
-                            modifier = Modifier.padding(
-                                top = 4.dp,
-                                bottom = 4.dp,
-                                start = 20.dp,
-                                end = 20.dp
-                            )
-                        )
-
-                    }
+                    CartItem(cartItem = cartItem, cartViewModel = cartViewModel)
                 }
             }
         }
 
         Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "Total:", modifier = Modifier.weight(1f), fontWeight = FontWeight.Bold, fontSize = 24.sp)
-            Text(text = "${totalPrice.value}", modifier= Modifier.weight(1f), fontWeight = FontWeight.Bold, fontSize = 24.sp, textAlign = TextAlign.Right)
+            Text(
+                text = "Total:",
+                modifier = Modifier.weight(1f),
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp
+            )
+            Text(
+                text = "${totalPrice.value}",
+                modifier = Modifier.weight(1f),
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                textAlign = TextAlign.Right
+            )
         }
     }
 }

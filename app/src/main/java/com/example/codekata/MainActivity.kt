@@ -58,7 +58,7 @@ fun ShoppingScaffold(navController: NavHostController, context: Context, cartVie
     ) { paddingValues ->
         NavHost(navController = navController, startDestination = Destination.Shop.route) {
             composable(Destination.Shop.route) {
-                ShopScreen(navController = navController, paddingValues = paddingValues, context = context, cartViewModel = cartViewModel)
+                ShopScreen(paddingValues = paddingValues, context = context, cartViewModel = cartViewModel)
             }
             composable(Destination.Cart.route) {
                 CartScreen(navController = navController, cartViewModel = cartViewModel, paddingValues = paddingValues, context = context)
