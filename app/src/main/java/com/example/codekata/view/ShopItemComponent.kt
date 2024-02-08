@@ -103,6 +103,7 @@ fun ShopItem(shopItem: Rule, cartViewModel: CartViewModel, context: Context) {
                         ).show()
                         itemToAdd.value[shopItem.sku] = counter.value
                         cartViewModel.addToCart(itemToAdd.value)
+                        cartViewModel.calculateCartTotal()
                         counter.value = 0
                     },
                     modifier = Modifier.size(40.dp, 40.dp),

@@ -52,6 +52,7 @@ fun CartItem(cartItem: Map.Entry<String, Int>, cartViewModel: CartViewModel) {
 
                     IconButton(onClick = {
                         cartViewModel.removeFromCart(cartItem.key)
+                        cartViewModel.calculateCartTotal()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_remove),

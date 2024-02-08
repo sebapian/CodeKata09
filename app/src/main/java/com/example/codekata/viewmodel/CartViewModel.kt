@@ -1,28 +1,17 @@
 package com.example.codekata.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateMapOf
-import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.codekata.R
 import com.example.codekata.ReadPriceRuleCsv
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CartViewModel @Inject constructor(@ApplicationContext context: Context): ViewModel() {
+class CartViewModel @Inject constructor(@ApplicationContext context: Context) : ViewModel() {
 
     val cart = mutableStateMapOf<String, Int>()
     val priceRule = ReadPriceRuleCsv.readCsv(context.resources.openRawResource(R.raw.price_rules))
@@ -31,26 +20,22 @@ class CartViewModel @Inject constructor(@ApplicationContext context: Context): V
     fun addToCart(item: HashMap<String, Int>) {
         val sku = item.keys.first()
         val itemAmount = item.values.first()
-        Log.d("SK", "sku: $sku, itemAmount: $itemAmount")
         if (cart.keys.contains(sku)) {
             cart[sku] = cart[sku]!! + itemAmount
         } else {
             cart[sku] = itemAmount
         }
-        totalPrice.value = calculateCartTotal(cart.toMap(LinkedHashMap()))
     }
 
     fun removeFromCart(sku: String) {
         if (cart.keys.contains(sku)) {
             if (cart[sku]!! > 0) {
-                Log.d("SK", "sku: $sku, cartAmount: ${cart[sku]}")
                 cart[sku] = cart[sku]!! - 1
             }
         }
-        totalPrice.value = calculateCartTotal(cart.toMap(LinkedHashMap()))
     }
 
-    fun calculateCartTotal(cart: LinkedHashMap<String, Int>): Float {
+    fun calculateCartTotal() {
         var total = 0f
         cart.forEach { item ->
             val itemAmount = item.value
@@ -76,6 +61,6 @@ class CartViewModel @Inject constructor(@ApplicationContext context: Context): V
                 itemAmount * itemPrice
             }
         }
-        return total
+        totalPrice.value = total
     }
 }

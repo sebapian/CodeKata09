@@ -1,6 +1,5 @@
 package com.example.codekata
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,11 +9,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,8 +36,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    val context = applicationContext
-                    ShoppingScaffold(navController = navController, context = context, cartViewModel = cartViewModel)
+                    ShoppingScaffold(navController = navController, cartViewModel = cartViewModel)
                 }
             }
         }
@@ -49,19 +44,19 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ShoppingScaffold(navController: NavHostController, context: Context, cartViewModel: CartViewModel) {
+fun ShoppingScaffold(navController: NavHostController, cartViewModel: CartViewModel) {
     val scaffoldState = rememberScaffoldState()
 
     Scaffold(
         scaffoldState = scaffoldState,
-        bottomBar = { ShopBottomNav(navController = navController)}
+        bottomBar = { ShopBottomNav(navController = navController) }
     ) { paddingValues ->
         NavHost(navController = navController, startDestination = Destination.Shop.route) {
             composable(Destination.Shop.route) {
-                ShopScreen(paddingValues = paddingValues, context = context, cartViewModel = cartViewModel)
+                ShopScreen(paddingValues = paddingValues, cartViewModel = cartViewModel)
             }
             composable(Destination.Cart.route) {
-                CartScreen(navController = navController, cartViewModel = cartViewModel, paddingValues = paddingValues, context = context)
+                CartScreen(cartViewModel = cartViewModel, paddingValues = paddingValues)
             }
         }
     }
