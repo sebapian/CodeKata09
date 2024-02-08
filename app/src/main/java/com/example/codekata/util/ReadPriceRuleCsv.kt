@@ -1,4 +1,4 @@
-package com.example.codekata
+package com.example.codekata.util
 
 import com.example.codekata.model.Rule
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader

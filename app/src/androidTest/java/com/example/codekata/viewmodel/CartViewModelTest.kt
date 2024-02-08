@@ -2,7 +2,7 @@ package com.example.codekata.viewmodel
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import com.example.codekata.ReadPriceRuleCsv
+import com.example.codekata.util.ReadPriceRuleCsv
 import com.example.codekata.model.Rule
 import io.mockk.every
 import io.mockk.mockk
@@ -22,16 +22,16 @@ class CartViewModelTest() {
     fun setup() {
         mockContext = ApplicationProvider.getApplicationContext()
         // Mock Read Price Rule
-        val mockReadPriceRule = mockk<ReadPriceRuleCsv>()
-        every {
-            mockReadPriceRule.readCsv(any())
-        } returns listOf(
-            Rule("SKU1", 10f, 3, 25f),
-            Rule("SKU2", 20f, null, null)
-        )
+//        val mockReadPriceRule = mockk<ReadPriceRuleCsv>()
+//        every {
+//            mockReadPriceRule.readCsv(any())
+//        } returns listOf(
+//            Rule("SKU1", 10f, 3, 25f),
+//            Rule("SKU2", 20f, null, null)
+//        )
 
         cartViewModel = CartViewModel(mockContext)
-        cartViewModel.readPriceRuleCsv = mockReadPriceRule
+//        cartViewModel.readPriceRuleCsv = mockReadPriceRule
     }
 
     @Test

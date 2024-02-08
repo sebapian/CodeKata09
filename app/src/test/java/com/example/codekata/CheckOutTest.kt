@@ -1,5 +1,6 @@
 package com.example.codekata
 
+import com.example.codekata.util.CheckOut
 import org.junit.Assert.*
 import org.junit.Test
 

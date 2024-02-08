@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.codekata.R
-import com.example.codekata.ReadPriceRuleCsv.readCsv
+import com.example.codekata.util.ReadPriceRuleCsv.readCsv
 import com.example.codekata.viewmodel.CartViewModel
 
 @Composable

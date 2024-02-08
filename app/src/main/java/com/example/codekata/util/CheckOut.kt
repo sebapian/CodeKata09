@@ -1,4 +1,4 @@
-package com.example.codekata
+package com.example.codekata.util
 
 class CheckOut {
     private var cart: LinkedHashMap<String, Int> = linkedMapOf()

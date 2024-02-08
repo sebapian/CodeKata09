@@ -1,6 +1,6 @@
-package com.example.codekata
+package com.example.codekata.util
 
-import com.example.codekata.ReadPriceRuleCsv.readCsv
+import com.example.codekata.util.ReadPriceRuleCsv.readCsv
 import com.example.codekata.model.Rule
 import java.io.InputStream
 

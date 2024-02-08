@@ -1,4 +1,4 @@
-package com.example.codekata
+package com.example.codekata.util
 
 import kotlin.io.path.Path
 import kotlin.io.path.absolutePathString

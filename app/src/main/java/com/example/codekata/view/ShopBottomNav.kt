@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.codekata.Destination
+import com.example.codekata.destination.Destination
 import com.example.codekata.R
 
 @Composable
